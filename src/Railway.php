@@ -31,16 +31,29 @@ final class Railway
         return $this->stations;
     }
 
-    public function meetsDividendPayoutRequirements(): bool
+    public function meetsDividendPayoutRequirements(DividendCubeDraw $draw): bool
     {
-        return \count($this->stations) > 1 && $this->railwayHasConnectedCity();
+        return \count($this->stations) > 1 && $this->hasConnectedCity() && $this->hasPayingCity($draw);
     }
 
-    private function railwayHasConnectedCity(): bool
+    private function hasConnectedCity(): bool
     {
         foreach ($this->stations as $station) {
             if ($station->inCity()) {
                 return true;
+            }
+        }
+
+        return false;
+    }
+
+    private function hasPayingCity(DividendCubeDraw $draw): bool
+    {
+        foreach ($this->stations as $station) {
+            foreach ($draw->asArray() as $specialInterest) {
+                if ($station->inCity() && $station->specialInterest() instanceof $specialInterest) {
+                    return true;
+                }
             }
         }
 
