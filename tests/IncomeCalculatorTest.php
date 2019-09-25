@@ -5,6 +5,11 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @covers \IrishGauge\IncomeCalculator
+ *
+ * @uses \IrishGauge\Station
+ * @uses \IrishGauge\Cube
+ * @uses \IrishGauge\Railway
+ * @uses \IrishGauge\DividendCubeDraw
  */
 final class IncomeCalculatorTest extends TestCase
 {

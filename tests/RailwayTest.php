@@ -5,6 +5,8 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @covers \IrishGauge\Railway
+ *
+ * @uses \IrishGauge\Station
  */
 final class RailwayTest extends TestCase
 {

@@ -52,4 +52,13 @@ final class StationTest extends TestCase
 
         $station->placeSpecialInterest(Cube::white());
     }
+
+    public function testSpecialInterestCubeCannotBeGetForTown(): void
+    {
+        $station = Station::town();
+
+        $this->expectException(NoSpecialInterestException::class);
+
+        $station->specialInterest();
+    }
 }
