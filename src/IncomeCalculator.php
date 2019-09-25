@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
 namespace IrishGauge;
 
-class IncomeCalculator
+final class IncomeCalculator
 {
     const DIVIDEND_FOR_CITY = 4;
 
