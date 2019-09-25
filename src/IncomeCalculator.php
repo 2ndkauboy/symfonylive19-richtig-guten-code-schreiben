@@ -3,9 +3,9 @@ namespace IrishGauge;
 
 final class IncomeCalculator
 {
-    const DIVIDEND_FOR_CITY = 4;
+    private const DIVIDEND_FOR_CITY = 4;
 
-    const DIVIDEND_FOR_TOWN = 2;
+    private const DIVIDEND_FOR_TOWN = 2;
 
     public function calculate(Railway $railway, DividendCubeDraw $draw): int
     {

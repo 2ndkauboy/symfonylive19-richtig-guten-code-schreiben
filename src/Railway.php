@@ -13,7 +13,7 @@ final class Railway
      *
      * @param Station[] $stations
      */
-    public function __construct(array $stations = [])
+    public function __construct(Station ...$stations)
     {
         $this->stations = $stations;
     }
