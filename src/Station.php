@@ -50,15 +50,4 @@ final class Station
 
         return $this->specialInterest;
     }
-
-    public function isPayingCity(DividendCubeDraw $draw): bool
-    {
-        foreach ($draw->asArray() as $specialInterest) {
-            if ($this->inCity() && $this->specialInterest() instanceof $specialInterest) {
-                return true;
-            }
-        }
-
-        return false;
-    }
 }
