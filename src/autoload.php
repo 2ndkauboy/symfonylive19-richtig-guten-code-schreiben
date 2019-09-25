@@ -13,6 +13,7 @@ spl_autoload_register(
                 'irishgauge\\exception' => '/exceptions/Exception.php',
                 'irishgauge\\nospecialinterestexception' => '/exceptions/NoSpecialInterestException.php',
                 'irishgauge\\pinkcube' => '/cubes/PinkCube.php',
+                'irishgauge\\railway' => '/Railway.php',
                 'irishgauge\\specialinterestcubealreadyplacedexception' => '/exceptions/SpecialInterestCubeAlreadyPlacedException.php',
                 'irishgauge\\station' => '/Station.php',
                 'irishgauge\\toofewcubesexception' => '/exceptions/TooFewCubesException.php',
