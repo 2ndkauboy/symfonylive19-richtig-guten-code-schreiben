@@ -36,25 +36,6 @@ final class Railway
         return \count($this->stations) > 1 && $this->hasConnectedCity() && $this->hasPayingCity($draw);
     }
 
-    public function calculateDividendPayout(DividendCubeDraw $draw): int
-    {
-        if (false === $this->meetsDividendPayoutRequirements($draw)) {
-            return 0;
-        }
-
-        $dividendPayout = 0;
-
-        foreach ($this->stations as $station) {
-            if ($station->isPayingCity($draw)) {
-                $dividendPayout += 4;
-            } elseif ($station->inTown()) {
-                $dividendPayout += 2;
-            }
-        }
-
-        return $dividendPayout;
-    }
-
     private function hasConnectedCity(): bool
     {
         foreach ($this->stations as $station) {
