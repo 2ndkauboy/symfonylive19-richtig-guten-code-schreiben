@@ -6,10 +6,10 @@ use PHPUnit\Framework\TestCase;
 /**
  * @covers \IrishGauge\IncomeCalculator
  *
- * @uses \IrishGauge\Station
- * @uses \IrishGauge\Cube
- * @uses \IrishGauge\Railway
- * @uses \IrishGauge\DividendCubeDraw
+ * @uses   \IrishGauge\Station
+ * @uses   \IrishGauge\Cube
+ * @uses   \IrishGauge\Railway
+ * @uses   \IrishGauge\DividendCubeDraw
  */
 final class IncomeCalculatorTest extends TestCase
 {
@@ -17,15 +17,11 @@ final class IncomeCalculatorTest extends TestCase
     {
         $calculator = new IncomeCalculator();
         $railway    = new Railway();
-        $city       = Station::city(Cube::black());
-        $town       = Station::town();
         $draw       = DividendCubeDraw::fromList(Cube::black());
 
-        $railway->connectStationToRailway($city);
-        $railway->connectStationToRailway($town);
+        $railway->connectStationToRailway(Station::city(Cube::black()));
+        $railway->connectStationToRailway(Station::town());
 
-        $this->assertContains($city, $railway->asArray());
-        $this->assertContains($town, $railway->asArray());
         $this->assertTrue($calculator->railwayMeetsDividendPayoutRequirements($railway, $draw));
     }
 
@@ -33,15 +29,11 @@ final class IncomeCalculatorTest extends TestCase
     {
         $calculator = new IncomeCalculator();
         $railway    = new Railway();
-        $black_city = Station::city(Cube::black());
-        $white_city = Station::city(Cube::white());
         $draw       = DividendCubeDraw::fromList(Cube::black());
 
-        $railway->connectStationToRailway($black_city);
-        $railway->connectStationToRailway($white_city);
+        $railway->connectStationToRailway(Station::city(Cube::black()));
+        $railway->connectStationToRailway(Station::city(Cube::white()));
 
-        $this->assertContains($black_city, $railway->asArray());
-        $this->assertContains($white_city, $railway->asArray());
         $this->assertTrue($calculator->railwayMeetsDividendPayoutRequirements($railway, $draw));
     }
 
@@ -58,12 +50,10 @@ final class IncomeCalculatorTest extends TestCase
     {
         $calculator = new IncomeCalculator();
         $railway    = new Railway();
-        $city       = Station::city(Cube::black());
         $draw       = DividendCubeDraw::fromList(Cube::black());
 
-        $railway->connectStationToRailway($city);
+        $railway->connectStationToRailway(Station::city(Cube::black()));
 
-        $this->assertContains($city, $railway->asArray());
         $this->assertFalse($calculator->railwayMeetsDividendPayoutRequirements($railway, $draw));
     }
 
@@ -71,28 +61,22 @@ final class IncomeCalculatorTest extends TestCase
     {
         $calculator = new IncomeCalculator();
         $railway    = new Railway();
-        $town       = Station::town();
         $draw       = DividendCubeDraw::fromList(Cube::black());
 
-        $railway->connectStationToRailway($town);
+        $railway->connectStationToRailway(Station::town());
 
-        $this->assertContains($town, $railway->asArray());
         $this->assertFalse($calculator->railwayMeetsDividendPayoutRequirements($railway, $draw));
     }
 
     public function testRailwayDoesNotMeetDividendPayoutRequirementWithTwoTowns(): void
     {
-        $calculator  = new IncomeCalculator();
-        $railway     = new Railway();
-        $first_town  = Station::town();
-        $second_town = Station::town();
-        $draw        = DividendCubeDraw::fromList(Cube::black());
+        $calculator = new IncomeCalculator();
+        $railway    = new Railway();
+        $draw       = DividendCubeDraw::fromList(Cube::black());
 
-        $railway->connectStationToRailway($first_town);
-        $railway->connectStationToRailway($second_town);
+        $railway->connectStationToRailway(Station::town());
+        $railway->connectStationToRailway(Station::town());
 
-        $this->assertContains($first_town, $railway->asArray());
-        $this->assertContains($second_town, $railway->asArray());
         $this->assertFalse($calculator->railwayMeetsDividendPayoutRequirements($railway, $draw));
     }
 
@@ -100,12 +84,10 @@ final class IncomeCalculatorTest extends TestCase
     {
         $calculator = new IncomeCalculator();
         $railway    = new Railway();
-        $city       = Station::city(Cube::black());
-        $town       = Station::town();
         $draw       = DividendCubeDraw::fromList(Cube::black());
 
-        $railway->connectStationToRailway($city);
-        $railway->connectStationToRailway($town);
+        $railway->connectStationToRailway(Station::city(Cube::black()));
+        $railway->connectStationToRailway(Station::town());
 
         $this->assertTrue($calculator->railwayMeetsDividendPayoutRequirements($railway, $draw));
         $this->assertEquals(6, $calculator->calculate($railway, $draw));
@@ -113,14 +95,12 @@ final class IncomeCalculatorTest extends TestCase
 
     public function testCalculateDividendPayoutForTwoPayingCity(): void
     {
-        $calculator  = new IncomeCalculator();
-        $railway     = new Railway();
-        $first_city  = Station::city(Cube::black());
-        $second_city = Station::city(Cube::black());
-        $draw        = DividendCubeDraw::fromList(Cube::black());
+        $calculator = new IncomeCalculator();
+        $railway    = new Railway();
+        $draw       = DividendCubeDraw::fromList(Cube::black());
 
-        $railway->connectStationToRailway($first_city);
-        $railway->connectStationToRailway($second_city);
+        $railway->connectStationToRailway(Station::city(Cube::black()));
+        $railway->connectStationToRailway(Station::city(Cube::black()));
 
         $this->assertTrue($calculator->railwayMeetsDividendPayoutRequirements($railway, $draw));
         $this->assertEquals(8, $calculator->calculate($railway, $draw));
@@ -130,12 +110,10 @@ final class IncomeCalculatorTest extends TestCase
     {
         $calculator = new IncomeCalculator();
         $railway    = new Railway();
-        $black_city = Station::city(Cube::black());
-        $white_city = Station::city(Cube::white());
         $draw       = DividendCubeDraw::fromList(Cube::pink());
 
-        $railway->connectStationToRailway($black_city);
-        $railway->connectStationToRailway($white_city);
+        $railway->connectStationToRailway(Station::city(Cube::black()));
+        $railway->connectStationToRailway(Station::city(Cube::white()));
 
         $this->assertFalse($calculator->railwayMeetsDividendPayoutRequirements($railway, $draw));
         $this->assertEquals(0, $calculator->calculate($railway, $draw));
@@ -143,14 +121,12 @@ final class IncomeCalculatorTest extends TestCase
 
     public function testCalculateDividendPayoutForTwoCitiesWithDuplicateCubesDrawn(): void
     {
-        $calculator  = new IncomeCalculator();
-        $railway     = new Railway();
-        $first_city  = Station::city(Cube::black());
-        $second_city = Station::city(Cube::black());
-        $draw        = DividendCubeDraw::fromList(Cube::black(), Cube::black());
+        $calculator = new IncomeCalculator();
+        $railway    = new Railway();
+        $draw       = DividendCubeDraw::fromList(Cube::black(), Cube::black());
 
-        $railway->connectStationToRailway($first_city);
-        $railway->connectStationToRailway($second_city);
+        $railway->connectStationToRailway(Station::city(Cube::black()));
+        $railway->connectStationToRailway(Station::city(Cube::black()));
 
         $this->assertTrue($calculator->railwayMeetsDividendPayoutRequirements($railway, $draw));
         $this->assertEquals(8, $calculator->calculate($railway, $draw));
