@@ -28,24 +28,13 @@ class IncomeCalculator
 
     public function railwayMeetsDividendPayoutRequirements(Railway $railway, DividendCubeDraw $draw): bool
     {
-        return \count($railway->asArray()) > 1 && $this->railwayHasConnectedCity($railway) && $this->railwayHasPayingCity($railway, $draw);
+        return \count($railway->asArray()) > 1 && $this->railwayHasPayingCity($railway, $draw);
     }
 
     public function stationIsPayingCity(Station $station, DividendCubeDraw $draw): bool
     {
         foreach ($draw->asArray() as $specialInterest) {
             if ($station->inCity() && $station->specialInterest() instanceof $specialInterest) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    private function railwayHasConnectedCity(Railway $railway): bool
-    {
-        foreach ($railway->asArray() as $station) {
-            if ($station->inCity()) {
                 return true;
             }
         }
